@@ -1,5 +1,4 @@
 import { View, Text } from "react-native"
-
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import * as Contacts from 'expo-contacts';
@@ -22,9 +21,13 @@ function home() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Contacts Module Example</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
   );
 }
 
