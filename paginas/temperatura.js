@@ -1,7 +1,7 @@
 // const response = await axios.get(`${url}?lat=${data.coords.latitude}&lon=${data.coords.longitude}&appid=${API_KEY}&units=metric`)
 import React, { useState, useEffect } from 'react';
 import {Text, SafeAreaView, StyleSheet } from 'react-native';
-import axios from "axios";
+const axios = require('axios')
 import * as Location from "expo-location"
 
 const API_KEY="3301fd17bfef8d6f8cdcf92da11f6f2b";
