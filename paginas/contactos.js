@@ -1,30 +1,26 @@
-import { View, Text } from "react-native"
-import React, { useEffect } from 'react';
 import * as Contacts from 'expo-contacts';
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import * as Contacts from 'expo-contacts';
+import { StyleSheet, View, Text, FlatList} from 'react-native';
 
 function contactos() {
-    useEffect(() => {
-      (async () => {
-        const { status } = await Contacts.requestPermissionsAsync();
-        if (status === 'granted') {
-          const { data } = await Contacts.getContactsAsync({
-            fields: [Contacts.Fields.Emails],
-          });
-  
-          if (data.length > 0) {
-            const contact = data[0];
-            console.log(contact);
-          }
+  const [contactos, setContactos] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
+        });
+        if(data.length > 0) {
+          setContactos(data)
         }
-      })();
-    }, []);
+      }
+    })();
+  },[]);
   
     return (
       <SafeAreaView style={styles.container}>
-        <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
+        <FlatList data={contactos} renderItem={renderItem} keyExtractor={item => item.id} />
       </SafeAreaView>
     );
   }

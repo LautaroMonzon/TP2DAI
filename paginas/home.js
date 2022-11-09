@@ -1,6 +1,5 @@
-import { View, Text } from "react-native"
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, FlatList} from 'react-native';
 import * as Contacts from 'expo-contacts';
 
 function home() {
@@ -22,13 +21,36 @@ function home() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+      backgroundColor: "lightgray",
+      justifyContent: "center",
+      alignItems: "center"
+  },
+  title: {
+      fontSize: 40,
+      fontWeight: "500",
+      marginTop: 20,
+  },
+  logo: {
+      height: 150,
+      width: 150,
+      marginTop: 20,
+  },
+  featureTitle: {
+      fontSize: 20,
+      fontWeight: "400",
+      marginTop: 10,
+      marginBottom: 10
+  },
+  featureContainer: {
+      flex: 2,
+      flexDirection: 'column'
+    },
+});
 
 export default home;
