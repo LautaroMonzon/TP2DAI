@@ -23,9 +23,9 @@ function contactos() {
     }, []);
   
     return (
-      <View style={styles.container}>
-        <Text>Contacts Module Example</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
+      </SafeAreaView>
     );
   }
 export default contactos;
