@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from 'react';
-import { StyleSheet, Text , View, TextInput, Linking } from 'react-native';
+import { StyleSheet, View, TextInput, Linking } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 
 function home() {
@@ -29,11 +29,10 @@ function home() {
   const { x, y, z } = cords;
   if(z>2||x>2||y>2){Linking.openURL('whatsapp://send?text=¡LLAMADO DE EMERGENCIA!&phone='+numero)}
 
-  const asignarValor = async(numero1) => {setNumero(numero1)}
+  const asignarValor = async(numeroIngresado) => {setNumero(numeroIngresado)}
 
   return (
     <View>
-      <Text>Tu numero es {numero}</Text>
       <TextInput onChangeText={asignarValor} keyboardType = 'numeric' placeholder="Numero de emergencia"></TextInput>
     </View>
   );
