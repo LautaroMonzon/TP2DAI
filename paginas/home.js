@@ -1,27 +1,44 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, FlatList} from 'react-native';
-import * as Contacts from 'expo-contacts';
+import { StyleSheet, View, Text, SafeAreaView, FlatList,Linking} from 'react-native';
 
 function home() {
-  useEffect(() => {
-    (async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails],
-        });
+  const [{ x, y, z }, setData] = useState({
+    x: 0,
+    y: 0,
+    z: 0,
+  }); 
+  const [subscription, setSubscription] = useState(null);
 
-        if (data.length > 0) {
-          const contact = data[0];
-          console.log(contact);
-        }
-      }
-    })();
+  const _slow = () => Accelerometer.setUpdateInterval(1000);
+  const _fast = () => Accelerometer.setUpdateInterval(16);
+
+  const _subscribe = () => {
+    setSubscription(
+      Accelerometer.addListener(setData)
+    );
+  };
+
+  const _unsubscribe = () => {
+    subscription && subscription.remove();
+    setSubscription(null);
+  };
+
+  useEffect(() => {
+    _subscribe();
+    return () => _unsubscribe();
   }, []);
 
+
+  if((x=2)||(y=2)||(z=2))
+  {
+    Linking.openURL('whatsapp://send?text=Llamado de emergencia='+numero)
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-    </SafeAreaView>
+    <View>
+      <Text>Tu numero es {numero}</Text>
+      <TextInput onChangeText={numero} keyboardType = 'numeric' placeholder="Numero de emergencia"></TextInput>
+    </View>
   );
 }
 
