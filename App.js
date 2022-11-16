@@ -12,8 +12,8 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="contactos" component={contacts} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+        
         
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, FlatList,Linking} from 'react-native';
+import React, {  useEffect, useState } from 'react';
+import { StyleSheet, Text , View, TextInput, Linking } from 'react-native';
+import { Accelerometer } from 'expo-sensors';
 
 function home() {
-  const [{ x, y, z }, setData] = useState({
+  const [numero,setNumero]=useState();
+  const [cords, setCords] = useState({
     x: 0,
     y: 0,
     z: 0,
-  }); 
+  });
   const [subscription, setSubscription] = useState(null);
 
-  const _slow = () => Accelerometer.setUpdateInterval(1000);
-  const _fast = () => Accelerometer.setUpdateInterval(16);
-
   const _subscribe = () => {
-    setSubscription(
-      Accelerometer.addListener(setData)
+    setSubscription(Accelerometer.addListener(accelerometerData => {setCords(accelerometerData);})
     );
   };
 
@@ -28,16 +26,15 @@ function home() {
     return () => _unsubscribe();
   }, []);
 
+  const { x, y, z } = cords;
+  if(z>2||x>2||y>2){Linking.openURL('whatsapp://send?text=¡LLAMADO DE EMERGENCIA!&phone='+numero)}
 
-  if((x=2)||(y=2)||(z=2))
-  {
-    Linking.openURL('whatsapp://send?text=Llamado de emergencia='+numero)
-  }
+  const asignarValor = async(numero1) => {setNumero(numero1)}
 
   return (
     <View>
       <Text>Tu numero es {numero}</Text>
-      <TextInput onChangeText={numero} keyboardType = 'numeric' placeholder="Numero de emergencia"></TextInput>
+      <TextInput onChangeText={asignarValor} keyboardType = 'numeric' placeholder="Numero de emergencia"></TextInput>
     </View>
   );
 }
