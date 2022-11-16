@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Linking } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 
 function home() {
-  const [numero,setNumero]=useState();
+  const [numeroCelular,setNumeroCelular]=useState();
   const [cords, setCords] = useState({
     x: 0,
     y: 0,
@@ -27,13 +27,13 @@ function home() {
   }, []);
 
   const { x, y, z } = cords;
-  if(z>2||x>2||y>2){Linking.openURL('whatsapp://send?text=¡LLAMADO DE EMERGENCIA!&phone='+numero)}
+  if(z>2||x>2||y>2){Linking.openURL('whatsapp://send?text=¡LLAMADO DE EMERGENCIA!&phone='+numeroCelular)}
 
-  const asignarValor = async(numeroIngresado) => {setNumero(numeroIngresado)}
+  const asignarValor = async(numeroCelularIngresado) => {setNumeroCelular(numeroCelularIngresado)}
 
   return (
     <View>
-      <TextInput onChangeText={asignarValor} keyboardType = 'numeric' placeholder="Numero de emergencia"></TextInput>
+      <TextInput onChangeText={asignarValor} keyboardType = 'numeric' placeholder="NumeroCelular de emergencia"></TextInput>
     </View>
   );
 }
