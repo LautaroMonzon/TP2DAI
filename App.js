@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './paginas/home';
 import contacts from './paginas/contactos';
 import temperatura from './paginas/temperatura';
+import configNumEmergencia from './paginas/configNumEmergencia';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -12,7 +14,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="configNumEmergencia" component={configNumEmergencia} />
         
         
       </Stack.Navigator>
